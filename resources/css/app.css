@@ -110,6 +110,7 @@
                disabled:opacity-50 disabled:cursor-not-allowed
                select-none whitespace-nowrap;
         height: 44px;
+        letter-spacing: 0.5px;
     }
 
     .btn-primary {
@@ -117,7 +118,8 @@
                hover:bg-primary-600
                active:bg-primary-700
                focus-visible:ring-primary-500
-               shadow-btn hover:shadow-glow-green;
+               shadow-btn hover:shadow-glow-green
+               transform-gpu hover:scale-[1.02] active:scale-[0.98];
     }
 
     .btn-secondary {
@@ -125,7 +127,8 @@
                hover:bg-dark-50 hover:border-dark-300
                active:bg-dark-100
                focus-visible:ring-primary-500
-               shadow-card;
+               shadow-card
+               transform-gpu hover:scale-[1.01];
     }
 
     .btn-outline {
@@ -139,7 +142,8 @@
         @apply btn bg-red-600 text-white
                hover:bg-red-700
                active:bg-red-800
-               focus-visible:ring-red-500;
+               focus-visible:ring-red-500
+               shadow-btn hover:shadow-glow-red;
     }
 
     .btn-ghost {
@@ -167,20 +171,24 @@
         @apply btn bg-secondary-500 text-white
                hover:bg-secondary-600
                active:bg-secondary-700
-               focus-visible:ring-secondary-500;
-        box-shadow: 0 4px 16px 0 rgba(217, 119, 6, 0.3);
+               focus-visible:ring-secondary-500
+               shadow-btn hover:shadow-glow-gold
+               transform-gpu hover:scale-[1.02] active:scale-[0.98];
     }
 
     /* Hero outline button (for dark backgrounds) */
     .btn-hero-outline {
-        @apply btn border-2 text-white font-semibold transition-all duration-200;
-        background: rgba(15, 23, 42, 0.2);
-        border-color: rgba(255, 255, 255, 0.2);
+        @apply btn border-2 text-white font-semibold transition-all duration-200
+               transform-gpu hover:scale-[1.02] active:scale-[0.98];
+        background: rgba(15, 23, 42, 0.25);
+        border-color: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(12px);
         height: 56px;
     }
     .btn-hero-outline:hover {
         background: rgba(15, 23, 42, 0.4);
-        border-color: rgba(255, 255, 255, 0.4);
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
     }
 
     /* ── Cards ─────────────────────────────────────────────────── */
@@ -188,12 +196,31 @@
         @apply bg-surface rounded-card border border-border
                shadow-card
                transition-all duration-300 ease-out;
+        position: relative;
+    }
+
+    .card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(5, 150, 105, 0.1), rgba(5, 150, 105, 0.02));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+    }
+
+    .card:hover::before {
+        opacity: 1;
     }
 
     .card-hover {
         @apply card
-               hover:-translate-y-1 hover:shadow-card-hover
-               hover:border-primary-200;
+               hover:-translate-y-1.5 hover:shadow-card-hover
+               hover:border-primary-300;
     }
 
     .card-body {
@@ -211,18 +238,30 @@
     /* Glass / Premium Cards */
     .card-premium {
         @apply rounded-card border shadow-elevated overflow-hidden;
-        background: rgba(255, 255, 255, 0.07);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-color: rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-color: rgba(255, 255, 255, 0.15);
+        transition: all 0.3s ease-out;
+    }
+
+    .card-premium:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.25);
     }
 
     .card-glass {
         border-radius: 1.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        transition: all 0.3s ease-out;
+    }
+
+    .card-glass:hover {
+        border-color: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.12);
     }
 
     /* ── Form Inputs ───────────────────────────────────────────── */
@@ -231,8 +270,15 @@
                text-body text-heading placeholder:text-muted
                transition-all duration-200
                focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500
-               disabled:bg-dark-50 disabled:text-muted disabled:cursor-not-allowed;
+               disabled:bg-dark-50 disabled:text-muted disabled:cursor-not-allowed
+               shadow-sm focus:shadow-md;
         height: 56px;
+        letter-spacing: 0.3px;
+    }
+
+    .form-input::placeholder {
+        font-weight: 400;
+        opacity: 0.7;
     }
 
     .form-select {
@@ -603,8 +649,58 @@
         50% { transform: translateY(-8px); }
     }
 
+    @keyframes slide-up {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fade-in {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    @keyframes pulse-slow {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: -1000px 0;
+        }
+        100% {
+            background-position: 1000px 0;
+        }
+    }
+
     .animate-float {
         animation: float 3s ease-in-out infinite;
+    }
+
+    .animate-slide-up {
+        animation: slide-up 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.5s ease-out forwards;
+        opacity: 0;
+    }
+
+    .animate-pulse-slow {
+        animation: pulse-slow 3s ease-in-out infinite;
+    }
+
+    .animate-shimmer {
+        animation: shimmer 2s infinite;
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+        background-size: 1000px 100%;
     }
 
     /* ── Background Patterns ──────────────────────────────────── */
@@ -689,6 +785,54 @@
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+
+    /* Enhanced shadows */
+    .shadow-sm {
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .shadow-md {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .shadow-lg {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .shadow-xl {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .shadow-elevated {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .shadow-glow-red {
+        box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+    }
+
+    /* Smooth borders */
+    .border-smooth {
+        border-style: solid;
+        border-image: linear-gradient(135deg, rgba(5, 150, 105, 0.3), rgba(5, 150, 105, 0.1)) 1;
+    }
+
+    /* Backdrop utilities */
+    .backdrop-blur-xs {
+        backdrop-filter: blur(2px);
+    }
+
+    .backdrop-blur-sm {
+        backdrop-filter: blur(4px);
+    }
+
+    .backdrop-blur-md {
+        backdrop-filter: blur(12px);
+    }
+
+    .backdrop-blur-lg {
+        backdrop-filter: blur(24px);
     }
 
     /* Aspect ratios */

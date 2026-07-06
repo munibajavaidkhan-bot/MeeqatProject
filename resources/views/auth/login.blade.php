@@ -5,13 +5,13 @@
 
     {{-- Header --}}
     <div class="text-center mb-8">
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-100 to-primary-50 border border-primary-200 flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 border border-primary-400 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary-500/30">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
             </svg>
         </div>
-        <h1 class="text-2xl font-black text-heading">Welcome Back!</h1>
-        <p class="text-muted text-sm mt-1">Login to your account</p>
+        <h1 class="text-3xl font-black text-heading tracking-tight">Welcome Back!</h1>
+        <p class="text-muted text-sm mt-2 font-medium">Login to access your Meeqat dashboard</p>
     </div>
 
     {{-- Session Error --}}

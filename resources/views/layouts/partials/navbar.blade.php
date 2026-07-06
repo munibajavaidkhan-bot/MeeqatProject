@@ -12,20 +12,20 @@
 
             {{-- ── Logo ─────────────────────────────────── --}}
             <a href="{{ route('home') }}"
-               class="flex items-center gap-3 group"
+               class="flex items-center gap-3 group transition-all duration-200"
                aria-label="Meeqat.io — Home">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700
                             flex items-center justify-center
-                            shadow-btn group-hover:shadow-glow-green
-                            group-hover:scale-105 transition-all duration-200">
+                            shadow-btn group-hover:shadow-lg group-hover:shadow-primary-500/30
+                            group-hover:scale-105 transition-all duration-300 font-bold">
                     <span class="text-white font-bold font-heading text-sm" aria-hidden="true">M</span>
                 </div>
                 <div class="flex flex-col leading-none">
-                    <span class="text-heading font-bold font-heading text-lg leading-tight">
+                    <span class="text-heading font-bold font-heading text-lg leading-tight tracking-tight">
                         Meeqat<span class="text-primary-500">.io</span>
                     </span>
-                    <span class="text-muted text-caption leading-tight mt-0.5">
-                        Hajj & Umrah Companion
+                    <span class="text-muted text-caption leading-tight mt-0.5 font-medium opacity-75">
+                        Hajj & Umrah
                     </span>
                 </div>
             </a>
@@ -142,16 +142,17 @@
                          @click.outside="open = false"
                          @keydown.escape="open = false">
 
-                        <button
-                            @click="open = !open"
-                            class="flex items-center gap-2.5 px-3 py-2 rounded-btn
-                                   bg-surface border border-border
-                                   hover:border-dark-300 hover:bg-dark-50
-                                   transition-all duration-200
-                                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
-                            :aria-expanded="open"
-                            aria-haspopup="true"
-                        >
+                <button
+                    @click="open = !open"
+                    class="flex items-center gap-2.5 px-3 py-2 rounded-btn
+                           bg-surface border border-border
+                           hover:border-primary-300 hover:bg-primary-50/50
+                           transition-all duration-200
+                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
+                           font-medium"
+                    :aria-expanded="open"
+                    aria-haspopup="true"
+                >
                             <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700
                                         flex items-center justify-center text-white text-caption font-bold"
                                  aria-hidden="true">

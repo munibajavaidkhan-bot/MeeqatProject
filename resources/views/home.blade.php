@@ -224,29 +224,32 @@
                 <a
                     href="{{ route($feature['route']) }}"
                     class="group relative card overflow-hidden p-0 border-2 {{ $feature['border'] }}
-                           transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card-hover animate-slide-up"
+                           transition-all duration-300 hover:-translate-y-2 hover:shadow-card-hover 
+                           animate-slide-up active:scale-[0.98]"
                     style="animation-delay: {{ $index * 0.08 }}s"
                 >
                     {{-- Card Image --}}
-                    <div class="relative h-48 overflow-hidden">
+                    <div class="relative h-48 overflow-hidden bg-gradient-to-br from-dark-800 to-dark-900">
                         <img src="{{ $feature['image'] }}"
                              alt="{{ $feature['title'] }}"
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                              loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent"></div>
 
                         {{-- Badge --}}
                         <div class="absolute top-4 right-4">
-                            <span class="{{ $feature['badgecls'] }} backdrop-blur-sm shadow-lg">
+                            <span class="{{ $feature['badgecls'] }} backdrop-blur-md shadow-lg font-semibold">
                                 {{ $feature['badge'] }}
                             </span>
                         </div>
 
                         {{-- Icon Overlay --}}
                         <div class="absolute bottom-4 left-4">
-                            <div class="w-12 h-12 rounded-2xl bg-dark-900/80 backdrop-blur-md
-                                        border border-white/10 flex items-center justify-center shadow-xl">
-                                <svg class="w-6 h-6 text-primary-400"
+                            <div class="w-12 h-12 rounded-2xl bg-dark-900/90 backdrop-blur-md
+                                        border border-white/20 flex items-center justify-center shadow-lg
+                                        group-hover:border-white/40 group-hover:bg-primary-500/20 
+                                        transition-all duration-300">
+                                <svg class="w-6 h-6 text-primary-400 transition-transform duration-300 group-hover:scale-110"
                                      fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"
                                      aria-hidden="true">
                                     {!! $feature['icon'] !!}
@@ -256,26 +259,30 @@
                     </div>
 
                     {{-- Card Content --}}
-                    <div class="p-6">
-                        <h3 class="text-heading font-heading font-bold text-h4 mb-2
-                                   group-hover:text-primary-600 transition-colors duration-300">
+                    <div class="p-6 flex flex-col h-full">
+                        <h3 class="text-heading font-heading font-bold text-h4 mb-2 text-lg
+                                   group-hover:text-primary-400 transition-colors duration-300 line-clamp-2">
                             {{ $feature['title'] }}
                         </h3>
-                        <p class="text-muted text-body-sm leading-relaxed mb-5">
+                        <p class="text-muted text-body-sm leading-relaxed mb-5 flex-1 text-dark-400">
                             {{ $feature['desc'] }}
                         </p>
 
                         {{-- CTA --}}
-                        <div class="flex items-center gap-2 text-primary-600 text-body-sm font-semibold
+                        <div class="flex items-center gap-2 text-primary-500 text-body-sm font-semibold
                                     group-hover:gap-3 transition-all duration-300">
                             {{ $feature['cta'] }}
-                            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                                 fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"
+                            <svg class="w-4 h-4 transition-all duration-300 group-hover:translate-x-1"
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"
                                  aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                             </svg>
                         </div>
                     </div>
+
+                    {{-- Gradient Border Effect --}}
+                    <div class="absolute inset-0 rounded-card opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none
+                                border border-primary-400/20" aria-hidden="true"></div>
                 </a>
             @endforeach
         </div>
